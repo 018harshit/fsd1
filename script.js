@@ -1,13 +1,9 @@
 document.getElementById('githubForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
     const usernames = document.getElementById('usernames').value.split(',').map(username => username.trim()).slice(0, 10); // Get up to 10 usernames
     const userDetailsDiv = document.getElementById('userDetails');
-
-    // Clear previous user details
     userDetailsDiv.innerHTML = '';
-
-    // Fetch user details for each username
     usernames.forEach(username => {
         fetch(`https://api.github.com/users/${username}`)
             .then(response => {
@@ -17,7 +13,7 @@ document.getElementById('githubForm').addEventListener('submit', function(event)
                 return response.json();
             })
             .then(data => {
-                // Display user details
+            
                 userDetailsDiv.innerHTML += `
                     <div class="user-card">
                         <h2>${data.login}</h2>
